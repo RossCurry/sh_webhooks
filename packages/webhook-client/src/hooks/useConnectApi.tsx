@@ -12,6 +12,7 @@ export default function useConnectApi() {
   useEffect(() => {
     const connectWebhookApi = async () => {
       const result = await fetch('http://localhost:4000/secret')
+      if (!result.ok) return
       const data = await result.json()
       setData(data)
       setApiConnected(true)
@@ -23,6 +24,5 @@ export default function useConnectApi() {
   return {
     apiConnected,
     secret: data?.secret,
-    socket
   }
 }

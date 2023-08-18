@@ -2,3 +2,27 @@
   display: flex;
   justify-content: space-between;
 }
+
+.webhookGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.table {
+  width: 50%;
+}
+
+.table .row{
+  padding: .5em;
+}
+
+.table .tableItem {
+  font-size: .75rem;
+  text-align: left;
+}
+
+.table
+tr:nth-child(even) {
+  background-color: #56565655;
+}
