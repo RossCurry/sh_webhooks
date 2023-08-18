@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import http from "http";
 import { Server } from 'socket.io';
+import { config } from '../../utils/staticConfig.js';
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
@@ -17,7 +18,7 @@ export const io = new Server(server, {
 });
 io.on("connection", (socket) => {
     console.info('Emitting socket');
-    socket.emit("hello from server", 1, "2", { 3: Buffer.from([4]) });
+    socket.emit("hello from server", { secret: config.socialHub.manifestSecret });
     socket.on("hello from client", (...args) => {
         console.info('Message from client', args);
     });

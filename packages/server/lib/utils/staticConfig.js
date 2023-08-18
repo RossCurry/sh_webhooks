@@ -1,6 +1,6 @@
 export const config = {
     socialHub: {
-        manifestSecret: 'should be at least 32 chars'
+        manifestSecret: 'random_32_or_more_chars_long_string'
     }
 };
 //# sourceMappingURL=staticConfig.js.map

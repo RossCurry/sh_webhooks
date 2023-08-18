@@ -4,10 +4,10 @@ import moment from 'moment'
 import crypto from 'node:crypto'
 import { config } from '../utils/staticConfig.js';
 
-class InvalidSignature extends Error {}
+class InvalidSignature extends Error { }
 
-export default function verifySignature (req: Request, res: Response, next: NextFunction) {
-  
+export default function verifySignature(req: Request, res: Response, next: NextFunction) {
+  console.log('call verifySignature')
   const {
     'x-socialhub-timestamp': reqTimestamp,
     'x-socialhub-signature': reqSignature,
@@ -45,6 +45,6 @@ export default function verifySignature (req: Request, res: Response, next: Next
   // Add solved challenge to response.
   // This will proof to SocialHub that we were the intended recipient.
   res.set('x-socialhub-challenge', challenge);
-  
+
   next();
 };

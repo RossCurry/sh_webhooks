@@ -4,6 +4,7 @@ import { config } from '../utils/staticConfig.js';
 class InvalidSignature extends Error {
 }
 export default function verifySignature(req, res, next) {
+    console.log('call verifySignature');
     const { 'x-socialhub-timestamp': reqTimestamp, 'x-socialhub-signature': reqSignature, } = req.headers;
     if (!reqTimestamp || !reqSignature) {
         throw new InvalidSignature('SocialHub headers missing from request');

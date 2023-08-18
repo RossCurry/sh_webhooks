@@ -11,21 +11,9 @@ socket.on("connect_error", (err) => {
   console.error(err)
 });
 
-// TODO currently not working
 socket.on('connection', (socket: Socket): void => {
   console.log('Client socket connected', socket.id)
   socket.on('disconnect', () => {
     console.log('Client socket disconnected', socket.id)
   })
 })
-
-export const emitSocket = () => {
-  socket.emit("hello from client", 5, "6", { 7: Uint8Array.from([8]) });
-}
-
-// receive a message from the server
-socket.on("hello from server", (...args) => {
-  // ...
-  console.log('Server message socket args', args)
-});
-

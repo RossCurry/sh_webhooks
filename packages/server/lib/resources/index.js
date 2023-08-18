@@ -1,9 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import verify from './verify.js';
 import processWebhookData from './processWebhookData.js';
 export const router = express.Router();
-router.get('/', (req, res) => {
-    res.json({ message: 'Hello, World!' });
+import { config } from '../utils/staticConfig.js';
+router.use(bodyParser.json());
+router.get('/secret', (_req, res) => {
+    res.json({ secret: config.socialHub.manifestSecret });
 });
-router.post('/webhook', bodyParser.json(), processWebhookData);
+router.post('/secret', setSecret);
+router.post('/webhook', verify, processWebhookData);
+function setSecret(req, res) {
+    console.log('called  setSecret', req.body);
+    const newSecret = req.body.secret;
+    config.socialHub.manifestSecret = newSecret;
+    console.log('config.socialHub.manifestSecret ', config.socialHub.manifestSecret);
+    res.json({ updatedSecret: config.socialHub.manifestSecret }).status(200);
+}
 //# sourceMappingURL=index.js.map
