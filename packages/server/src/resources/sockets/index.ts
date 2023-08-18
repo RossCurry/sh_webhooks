@@ -14,9 +14,12 @@ app.use(bodyParser.json());
 
 const SOCKET_PORT = process.env.SOCKET_PORT || 3005;
 
-const io = new Server(server, {
+// TODO type this:
+// new Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>
+export const io = new Server<any, any, any, any>(server, {
   cors: {
-    origin: '*' // This should be set to a specific origin in production
+    // TODO This should be set to a specific origin in production
+    origin: '*' 
   }
 });
 

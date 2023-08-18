@@ -10,7 +10,7 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(bodyParser.json());
 const SOCKET_PORT = process.env.SOCKET_PORT || 3005;
-const io = new Server(server, {
+export const io = new Server(server, {
     cors: {
         origin: '*'
     }

@@ -1,4 +1,5 @@
+import { io as socket } from './sockets/index.js';
 export default function processWebhookData(req, res) {
-    res.json(req.body);
+    socket.emit('webhookEvent', req.headers);
 }
 //# sourceMappingURL=processWebhookData.js.map

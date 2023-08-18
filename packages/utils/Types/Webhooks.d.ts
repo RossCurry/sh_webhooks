@@ -1,0 +1,1 @@
+export type WebhookRequest = Record<string, string | number>;
