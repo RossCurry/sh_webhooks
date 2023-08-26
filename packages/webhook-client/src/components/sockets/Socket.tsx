@@ -2,19 +2,18 @@ import React, { useState } from 'react'
 import { socket } from './index.js'
 import style from './Socket.module.css'
 import { WebhookRequest } from '@socialhub/webhooker-utils/Types/Webhooks'
-// import { exampleResponse } from '../../assets/example-response'
+import { exampleResponse } from '../../assets/example-response'
 
 
 export default function Socket() {
   const [socketConnected, setSocketConnected] = useState<boolean>(false)
-  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>()
+  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>(exampleResponse)
   
   socket.on('connect', () => {
     setSocketConnected(true)
   })
   socket.on('webhookEvent', (webhookEvent: WebhookRequest) => {
     setCurrentWebhookRequest(webhookEvent)
-    console.log('webhookEvent', webhookEvent)
   })
 
   if (!socketConnected) return null
@@ -69,7 +68,6 @@ export default function Socket() {
 }
 
 type HProps = {
-  // headers: WebhookRequest["headers"]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   info: Record<string, any>
   title: string,

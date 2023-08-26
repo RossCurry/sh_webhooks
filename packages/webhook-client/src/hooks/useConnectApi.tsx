@@ -12,7 +12,6 @@ export default function useConnectApi() {
   const endpoint = isProd 
         ? import.meta.env.VITE_API_ENDPOINT + "/secret" 
         : import.meta.env.VITE_API_ENDPOINT + ":4000" + "/secret" 
-  console.log('endpoint', endpoint)
   useEffect(() => {
     const connectWebhookApi = async () => {
       const result = await fetch(endpoint)

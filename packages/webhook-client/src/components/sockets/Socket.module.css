@@ -12,21 +12,23 @@
 .webhookGrid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  /* background-color: rgba(225, 145, 40, 0.195); */
   gap: 1rem;
-  /* grid-template-columns: 1fr 1fr;
+}
+
+/* Alternative grid assignment */
+/* .webhookGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: .5fr .5fr 1fr;
   grid-template-areas:
     "top-left top-right"
     "top-left top-right"
     "bottom-left bottom-right"
-  ; */
-}
+  ;
+} */
 
 .tableContainer{
-  /* background-color: rgba(0, 255, 255, 0.19); */
-  width: 100%;
-  /* box-shadow: 0 0 4px 0px rgba(155, 155, 155, 0.386); */
   padding: 0 1em;
 }
 
@@ -47,18 +49,15 @@
 }
 
 .table {
-  /* background-color: rgba(0, 89, 255, 0.19); */
   text-align: left;
   word-wrap: break-word;
   margin: 0;
   padding: 0;
-  width: 100%;
   table-layout: fixed;
 }
 
 .table .row {
   padding: .5em;
-  width: 100%;
 }
 
 .table .tableItem {
@@ -67,9 +66,7 @@
   text-align: left;
 }
 
-
-.table
-tr:nth-child(even) {
+.table tr:nth-child(even) {
   background-color: #56565655;
 }
 .table tr td:first-child {

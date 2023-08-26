@@ -22,7 +22,6 @@ export default function Connected() {
       setButtonAction("submit")
     }
     if (buttonAction === "submit"){
-      console.log("acction submit")
       if (!inputValue){
         // change some color
         // warn user
@@ -35,7 +34,6 @@ export default function Connected() {
       const endpoint = isProd 
         ? import.meta.env.VITE_API_ENDPOINT + "/secret" 
         : import.meta.env.VITE_API_ENDPOINT + ":4000" + "/secret" 
-      console.log('connect endpoint', endpoint)
       const result = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -46,7 +44,6 @@ export default function Connected() {
       // TODO setError
       if (!result.ok) setInputValue(previousSecret)
       const data = await result.json()
-      console.log('return value', data.updatedSecret)
       setInputValue('')
       setCurrentSecret(data.updatedSecret)
       setButtonAction("showForm")

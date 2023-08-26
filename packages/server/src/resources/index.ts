@@ -13,12 +13,10 @@ router.get('/secret', (_req, res) => {
 });
 
 router.post('/secret',
-// bodyParser.json(),
-setSecret,
+  setSecret,
 );
 
 router.post('/webhook',
-  // bodyParser.json(),
   verify,
   processWebhookData
 );

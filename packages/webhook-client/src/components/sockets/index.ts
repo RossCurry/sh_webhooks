@@ -2,9 +2,8 @@ import { Socket, io } from "socket.io-client";
 const socketEndpoint = import.meta.env.PROD 
   ? import.meta.env.VITE_API_ENDPOINT
   : import.meta.env.VITE_API_ENDPOINT + ":" + import.meta.env.VITE_API_PORT
-console.log('socketEndpoint', socketEndpoint)
-export const socket = io(socketEndpoint);
 
+export const socket = io(socketEndpoint);
 
 socket.on('connect', (): void => {
   console.log('Client socket connected')

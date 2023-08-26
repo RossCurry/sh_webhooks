@@ -4,11 +4,10 @@ import bodyParser from 'body-parser';
 import  http from "http"
 import { Server } from 'socket.io';
 import { router } from './resources/index.js';
-// Importing socket server
-// import './resources/sockets/index.js'
+import { config } from './utils/staticConfig.js';
+
 // Configure env variables
 import dotenv from 'dotenv'
-import { config } from './utils/staticConfig.js';
 dotenv.config()
 
 
@@ -44,7 +43,6 @@ io.on("connection", (socket) => {
     // ...
   });
 });
-
 
 io.on("connect_error", (err: Error): void => {
   console.error(err)
