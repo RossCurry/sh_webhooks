@@ -8,10 +8,11 @@ const emitHello = () => {
 export default function useConnectApi() {
   const [apiConnected, setApiConnected] = useState<boolean>(false)
   const [data, setData] = useState<{ secret: string }>()
-
+  const endpoint = import.meta.env.VITE_API_ENDPOINT + "/secret"
+  console.log('endpoint', endpoint)
   useEffect(() => {
     const connectWebhookApi = async () => {
-      const result = await fetch('http://localhost:4000/secret')
+      const result = await fetch(endpoint)
       if (!result.ok) return
       const data = await result.json()
       setData(data)

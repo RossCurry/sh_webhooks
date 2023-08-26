@@ -1,6 +1,7 @@
 import { Socket, io } from "socket.io-client";
-
-export const socket = io('http://localhost:3005/');
+const socketEndpoint = import.meta.env.VITE_API_ENDPOINT + ":" + import.meta.env.VITE_API_SOCKET_PORT
+console.log('socketEndpoint', socketEndpoint)
+export const socket = io(socketEndpoint);
 
 
 socket.on('connect', (): void => {

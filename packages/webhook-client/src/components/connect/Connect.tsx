@@ -31,8 +31,9 @@ export default function Connected() {
       // POST request
       // TODO setWaiting
       const body = JSON.stringify({ secret: inputValue })
-      console.log('body', body)
-      const result = await fetch('http://localhost:4000/secret', {
+      const endpoint = import.meta.env.VITE_API_ENDPOINT + "/secret"
+      console.log('endpoint', endpoint)
+      const result = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
