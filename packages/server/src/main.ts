@@ -12,22 +12,25 @@ import { config } from './utils/staticConfig.js';
 dotenv.config()
 
 
-const corsOptions = process.env.PROD 
-  ? {
-  origin: 'https://sh-webhook-tester.netlify.app/',
+const corsOptions =  {
+  origin: process.env.PROD === "true" ? 'https://sh-webhook-tester.netlify.app/' : "*",
   methods: ["GET", "POST"]
-} : {}
+}
 
 const app = express();
 const server = http.createServer(app);
 
 
+const socketIoCorsOptions = {
+  origin: process.env.PROD === "true" ?  "https://sh-webhook-tester.netlify.app/" : "*",
+  methods: ["GET", "POST"],
+  transports: ['websocket', 'polling'],
+  credentials: true
+}
 
 export const io = new Server<any, any, any, any>(server, {
-  cors: {
-    // TODO This should be set to a specific origin in production
-    origin: '*' 
-  }
+  cors: socketIoCorsOptions,
+  allowEIO3: true
 });
 
 io.on("connection", (socket) => {
