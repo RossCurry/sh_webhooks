@@ -13,7 +13,7 @@ dotenv.config()
 
 
 const corsOptions =  {
-  origin: process.env.PROD === "true" ? 'https://sh-webhook-tester.netlify.app/' : "*",
+  origin: process.env.PROD === "true" ? 'https://sh-webhook-tester.netlify.app' : "*",
   methods: ["GET", "POST"]
 }
 
@@ -22,7 +22,7 @@ const server = http.createServer(app);
 
 
 const socketIoCorsOptions = {
-  origin: process.env.PROD === "true" ?  "https://sh-webhook-tester.netlify.app/" : "*",
+  origin: process.env.PROD === "true" ?  "https://sh-webhook-tester.netlify.app" : "*",
   methods: ["GET", "POST"],
   transports: ['websocket', 'polling'],
   credentials: true
