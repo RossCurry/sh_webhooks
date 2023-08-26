@@ -75,11 +75,17 @@ export default function Connected() {
     <div className={style.card}>
         <h3>API Connected</h3>
         <form>
-          <label id="secret">
+          <label id="secret" className={style.secretLabel}>
             webhook secret:
-            {buttonAction === "submit" && <input type="text" name="secret" id="secret" placeholder={currentSecret} onChange={handleOnChange} value={inputValue}/>}
+            {buttonAction === "submit" && 
+              <input type="text" name="secret" id="secret" placeholder={currentSecret} onChange={handleOnChange} value={inputValue}/>
+            }
           </label>
-          {buttonAction === "showForm" && currentSecret && <p>{currentSecret}</p>}
+          {buttonAction === "showForm" && currentSecret && 
+            <span className={style.currentSecret}>
+              {currentSecret}
+            </span>
+          }
           <button type="button" onClick={handleOnClick}>{buttonInnerText[buttonAction]}</button>
         </form>
       </div>

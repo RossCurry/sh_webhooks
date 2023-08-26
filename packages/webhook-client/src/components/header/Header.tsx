@@ -6,7 +6,7 @@ import style from './Header.module.css'
 
 export default function Header() {
   return (
-    <>
+    <div className={style.headerContainer}>
       <h1>Webhooks + SocketIO</h1>
       <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className={style.logo} alt="Vite logo" />
@@ -17,6 +17,6 @@ export default function Header() {
       <a href="https://socket.io" target="_blank">
         <img src={'https://upload.wikimedia.org/wikipedia/commons/9/96/Socket-io.svg'} className={style.logo} alt="Socket IO logo" />
       </a>
-    </>
+    </div>
   )
 }
