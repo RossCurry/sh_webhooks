@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { socket } from '.'
 import style from './Socket.module.css'
 import { WebhookRequest } from '@socialhub/webhooker-utils/Types/Webhooks'
-import { exampleResponse } from '../../assets/example-response'
+// import { exampleResponse } from '../../assets/example-response'
+
 
 export default function Socket() {
   const [socketConnected, setSocketConnected] = useState<boolean>(false)
-  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>(exampleResponse)
+  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>()
   
   socket.on('connect', () => {
     setSocketConnected(true)
@@ -79,7 +80,7 @@ type HProps = {
 function RequestInfoTable(props: HProps) {
   const [displayAsJson, setDisplayAsJson] = useState<boolean>(props.isBody ? true : false)
   const RequestInfo = JSON.parse(JSON.stringify(props.info))
-  console.log(Object.entries(RequestInfo))
+  
   if (!RequestInfo) return <div>no key : val data</div>
   return (
     <div className={style.tableContainer} style={

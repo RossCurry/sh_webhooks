@@ -11,8 +11,8 @@ export default function Connected() {
   const previousSecret = secret || ''
 
   const buttonInnerText = {
-    showForm: 'change secret',
-    submit: !inputValue ? 'cancel' : 'update secret'
+    showForm: 'change',
+    submit: !inputValue ? 'cancel' : 'update'
   }
 
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -77,16 +77,18 @@ export default function Connected() {
         <form>
           <label id="secret" className={style.secretLabel}>
             webhook secret:
+          </label>
+          <div className={style.secretWrapper}>
             {buttonAction === "submit" && 
               <input type="text" name="secret" id="secret" placeholder={currentSecret} onChange={handleOnChange} value={inputValue}/>
             }
-          </label>
-          {buttonAction === "showForm" && currentSecret && 
-            <span className={style.currentSecret}>
-              {currentSecret}
-            </span>
-          }
-          <button type="button" onClick={handleOnClick}>{buttonInnerText[buttonAction]}</button>
+            {buttonAction === "showForm" && currentSecret && 
+              <span className={style.currentSecret}>
+                {currentSecret}
+              </span>
+            }
+            <button type="button" onClick={handleOnClick}>{buttonInnerText[buttonAction]}</button>
+          </div>
         </form>
       </div>
   )
