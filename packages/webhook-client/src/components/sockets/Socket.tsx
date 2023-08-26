@@ -26,9 +26,7 @@ export default function Socket() {
         </div>
       </div>
       {currentWebhookRequest &&
-        // JSON.stringify(Object.keys(currentWebhookRequest))
         <div className={style.webhookGrid}>
-          {/* <div> */}
             <RequestInfoTable 
               key='Request Info' 
               title='Request Info' 
@@ -45,7 +43,6 @@ export default function Socket() {
               colPos='1 / 7'
               rowPos='3 / 6'
             />
-          {/* </div> */}
           <RequestInfoTable 
             key='Header Info' 
             title='Header Info' 
@@ -81,14 +78,8 @@ type HProps = {
 }
 function RequestInfoTable(props: HProps) {
   const [displayAsJson, setDisplayAsJson] = useState<boolean>(props.isBody ? true : false)
-  const { title } = props
   const RequestInfo = JSON.parse(JSON.stringify(props.info))
   console.log(Object.entries(RequestInfo))
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = e.target
-    if (value === "json") setDisplayAsJson(true)
-    else setDisplayAsJson(false)
-  }
   if (!RequestInfo) return <div>no key : val data</div>
   return (
     <div className={style.tableContainer} style={
@@ -96,17 +87,12 @@ function RequestInfoTable(props: HProps) {
         gridColumn: props.colPos, 
         gridRow: props.rowPos 
       }}>
-      <div className={style.tableHeader}>
-        <h3>{title}</h3>
-        <div className={style.tableDisplaySelectors}>
-          {props.isBody && <>
-            <label htmlFor="json">json</label>
-            <input type="radio" name="content-type" id="json" value={"json"} onChange={handleOnChange} checked={displayAsJson}/>
-            <label htmlFor="record">record</label>
-            <input type="radio" name="content-type" id="record" value={"record"} onChange={handleOnChange}/>
-          </>}
-        </div>
-      </div>
+      <TableHeader 
+        displayAsJson={displayAsJson}
+        showSelectors={!!props.isBody}
+        title={props.title}
+        setDisplayAsJson={setDisplayAsJson}
+      />
       <hr />
       <table className={style.table}>
         <tbody>
@@ -121,6 +107,38 @@ function RequestInfoTable(props: HProps) {
   )
 }
 
+
+
+type TableHeaderProps = {
+  title: string,
+  showSelectors: boolean,
+  displayAsJson: boolean,
+  setDisplayAsJson: React.Dispatch<React.SetStateAction<boolean>>
+}
+function TableHeader(props: TableHeaderProps) {
+  const { setDisplayAsJson, displayAsJson, showSelectors, title } = props
+  
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {value} = e.target
+    if (value === "json") setDisplayAsJson(true)
+    else setDisplayAsJson(false)
+  }
+  
+  return (
+    <div className={style.tableHeader}>
+        <h3>{title}</h3>
+      <div className={style.tableDisplaySelectors}>
+          {showSelectors && <>
+            <label htmlFor="json">json</label>
+            <input type="radio" name="content-type" id="json" value={"json"} onChange={handleOnChange} checked={displayAsJson}/>
+            <label htmlFor="record">record</label>
+            <input type="radio" name="content-type" id="record" value={"record"} onChange={handleOnChange}/>
+          </>}
+        </div>
+    </div>
+  )
+}
+
 type AsJsonProps = {
   content: Record<string, string>
 }
@@ -130,6 +148,7 @@ function AsJson(props: AsJsonProps) {
     <><pre>{JSON.stringify(content, null, 2)}</pre></>
   )
 }
+
 type AsRecordProps = {
   requestInfo: Record<string, string>
 }
