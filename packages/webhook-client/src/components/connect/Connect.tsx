@@ -74,6 +74,7 @@ export default function Connected() {
   return (
     <div className={style.card}>
         <h3>API Connected</h3>
+        <hr />
         <form>
           <label id="secret" className={style.secretLabel}>
             webhook secret:
@@ -87,7 +88,7 @@ export default function Connected() {
                 {currentSecret}
               </span>
             }
-            <button type="button" onClick={handleOnClick}>{buttonInnerText[buttonAction]}</button>
+            <button type="submit" onClick={handleOnClick}>{buttonInnerText[buttonAction]}</button>
           </div>
         </form>
       </div>

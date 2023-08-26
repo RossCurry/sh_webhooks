@@ -1,4 +1,3 @@
-import React from 'react'
 import reactLogo from '/react.svg'
 import viteLogo from '/vite.svg'
 import style from './Header.module.css'

@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { socket } from '.'
 import style from './Socket.module.css'
 import { WebhookRequest } from '@socialhub/webhooker-utils/Types/Webhooks'
-// import { exampleResponse } from '../../assets/example-response'
+import { exampleResponse } from '../../assets/example-response'
 
 
 export default function Socket() {
   const [socketConnected, setSocketConnected] = useState<boolean>(false)
-  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>()
+  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>(exampleResponse)
   
   socket.on('connect', () => {
     setSocketConnected(true)
@@ -26,6 +26,7 @@ export default function Socket() {
           {!currentWebhookRequest && <p>Send Webhook request</p>}
         </div>
       </div>
+        <hr />
       {currentWebhookRequest &&
         <div className={style.webhookGrid}>
             <RequestInfoTable 

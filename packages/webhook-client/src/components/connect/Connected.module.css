@@ -1,8 +1,14 @@
 .card {
   display: flex;
   justify-content: space-between;
-  /* flex-direction: column; */
-  /* width: 100%; */
+  flex-direction: column;
+  text-align: left;
+  padding: 1em;
+  border-radius: 12px;
+}
+
+.card hr {
+  width: 100%;
 }
 
 form {
