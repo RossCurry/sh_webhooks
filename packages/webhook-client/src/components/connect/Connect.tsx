@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import useConnectApi from '../../hooks/useConnectApi.js'
 import style from './Connected.module.css'
 import { socket } from '../sockets/index.js'
+import Badge from '../badge/badge.js'
 const isProd = import.meta.env.PROD
 
 export default function Connected() {
@@ -15,8 +16,6 @@ export default function Connected() {
     showForm: 'change',
     submit: !inputValue ? 'cancel' : 'update'
   }
-
-  const badgeClass = apiConnected ? style.connected : style.disconnected
 
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
@@ -73,16 +72,11 @@ export default function Connected() {
     if (secret) setCurrentSecret(secret)
   }, [secret])
 
-  if (!apiConnected) return null
   return (
     <div className={style.card}>
-        <div className={style.badge}>
-          <div className={style.connected}></div>
-        </div>
-        <h3>API Connected</h3>
-        {/* <h3><span className={badgeClass}>API Connected</span></h3> */}
+        <Badge isConnected={apiConnected} title={"API Connected"} />
         <hr />
-        <form>
+        {apiConnected && <form>
           <label id="secret" className={style.secretLabel}>
             webhook secret:
           </label>
@@ -97,7 +91,7 @@ export default function Connected() {
             }
             <button type="submit" onClick={handleOnClick}>{buttonInnerText[buttonAction]}</button>
           </div>
-        </form>
+        </form>}
       </div>
   )
 }

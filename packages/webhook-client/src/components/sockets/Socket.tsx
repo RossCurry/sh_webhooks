@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { socket } from './index.js'
 import style from './Socket.module.css'
 import { WebhookRequest } from '@socialhub/webhooker-utils/Types/Webhooks'
-import { exampleResponse } from '../../assets/example-response'
+// import { exampleResponse } from '../../assets/example-response'
+import Badge from '../badge/badge.js'
 
 
 export default function Socket() {
   const [socketConnected, setSocketConnected] = useState<boolean>(false)
-  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>(exampleResponse)
+  const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>()
   
   socket.on('connect', () => {
     setSocketConnected(true)
@@ -16,13 +17,12 @@ export default function Socket() {
     setCurrentWebhookRequest(webhookEvent)
   })
 
-  if (!socketConnected) return null
   return (
     <div>
       <div className={style.card}>
-        <h3>Socket Connected</h3>
+        <Badge title='Socket Connected' isConnected={socketConnected} />
         <div className={style.socketInfoContainer}>
-          {!currentWebhookRequest && <p>Send Webhook request</p>}
+          {!currentWebhookRequest && <p>{socketConnected ? "Send Webhook request" : ""}</p>}
         </div>
       </div>
         <hr />
