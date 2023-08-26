@@ -1,5 +1,5 @@
 import { Socket, io } from "socket.io-client";
-const socketEndpoint = import.meta.env.VITE_API_ENDPOINT + ":" + import.meta.env.VITE_API_SOCKET_PORT
+const socketEndpoint = import.meta.env.VITE_API_ENDPOINT + ":" + import.meta.env.VITE_API_PORT
 console.log('socketEndpoint', socketEndpoint)
 export const socket = io(socketEndpoint);
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import useConnectApi from '../../hooks/useConnectApi'
+import useConnectApi from '../../hooks/useConnectApi.js'
 import style from './Connected.module.css'
-import { socket } from '../sockets'
+import { socket } from '../sockets/index.js'
+const isProd = import.meta.env.PROD
 
 export default function Connected() {
   const { apiConnected, secret } = useConnectApi()
@@ -31,8 +32,10 @@ export default function Connected() {
       // POST request
       // TODO setWaiting
       const body = JSON.stringify({ secret: inputValue })
-      const endpoint = import.meta.env.VITE_API_ENDPOINT + "/secret"
-      console.log('endpoint', endpoint)
+      const endpoint = isProd 
+        ? import.meta.env.VITE_API_ENDPOINT + "/secret" 
+        : import.meta.env.VITE_API_ENDPOINT + ":4000" + "/secret" 
+      console.log('connect endpoint', endpoint)
       const result = await fetch(endpoint, {
         method: 'POST',
         headers: {

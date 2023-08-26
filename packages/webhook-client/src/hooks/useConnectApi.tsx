@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { socket } from '../components/sockets'
+import { socket } from '../components/sockets/index.js'
+const isProd = import.meta.env.PROD
 
 const emitHello = () => {
   socket.emit("hello from client", 'Client connected');
@@ -8,7 +9,9 @@ const emitHello = () => {
 export default function useConnectApi() {
   const [apiConnected, setApiConnected] = useState<boolean>(false)
   const [data, setData] = useState<{ secret: string }>()
-  const endpoint = import.meta.env.VITE_API_ENDPOINT + "/secret"
+  const endpoint = isProd 
+        ? import.meta.env.VITE_API_ENDPOINT + "/secret" 
+        : import.meta.env.VITE_API_ENDPOINT + ":4000" + "/secret" 
   console.log('endpoint', endpoint)
   useEffect(() => {
     const connectWebhookApi = async () => {

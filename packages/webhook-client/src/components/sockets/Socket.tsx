@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { socket } from '.'
+import { socket } from './index.js'
 import style from './Socket.module.css'
 import { WebhookRequest } from '@socialhub/webhooker-utils/Types/Webhooks'
 // import { exampleResponse } from '../../assets/example-response'
