@@ -9,3 +9,10 @@
 .read-the-docs {
   color: #888;
 }
+
+#app{
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-rows: repeat(12 1fr);
+  gap: 2rem;
+}

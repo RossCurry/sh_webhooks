@@ -8,6 +8,7 @@ class InvalidSignature extends Error { }
 
 export default function verifySignature(req: Request, res: Response, next: NextFunction) {
   console.log('call verifySignature')
+  if (!config.useValidation) next()
   const {
     'x-socialhub-timestamp': reqTimestamp,
     'x-socialhub-signature': reqSignature,

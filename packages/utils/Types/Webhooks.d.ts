@@ -27,3 +27,10 @@ export type UrlInfo = {
 export type Headers = Request['headers']
 
 export type Body = Record<string, unknown>
+
+export type ResponseConfig = {
+  config: {
+    useValidation: boolean,
+    secret: string
+  }
+}

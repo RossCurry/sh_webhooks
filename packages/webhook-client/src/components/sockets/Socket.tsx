@@ -2,19 +2,21 @@ import React, { useState } from 'react'
 import { socket } from './index.js'
 import style from './Socket.module.css'
 import { WebhookRequest } from '@socialhub/webhooker-utils/Types/Webhooks'
-// import { exampleResponse } from '../../assets/example-response'
 import Badge from '../badge/badge.js'
+import useRequestList from '../../hooks/useRequestList.js'
 
 
 export default function Socket() {
   const [socketConnected, setSocketConnected] = useState<boolean>(false)
   const [currentWebhookRequest, setCurrentWebhookRequest] = useState<WebhookRequest>()
+  const { addRequestListItem } = useRequestList()
   
   socket.on('connect', () => {
     setSocketConnected(true)
   })
   socket.on('webhookEvent', (webhookEvent: WebhookRequest) => {
     setCurrentWebhookRequest(webhookEvent)
+    addRequestListItem(webhookEvent)
   })
 
   return (
